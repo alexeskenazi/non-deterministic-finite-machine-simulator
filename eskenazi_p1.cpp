@@ -48,7 +48,7 @@ int main(int argc, char* argv[]) {
     // string input = argv[2];
     string command;
     string input_file = "data/sample_2.txt";
-    string input = "001";
+    string input = "0101";
 
     // Open file for reading
     ifstream infile(input_file);
@@ -86,6 +86,8 @@ int main(int argc, char* argv[]) {
    
     // Close the input and output files
     infile.close();
+    string output = automata.run(input);
+    cout << output << endl;
     return 0;
 }
 

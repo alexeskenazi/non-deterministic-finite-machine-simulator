@@ -48,12 +48,44 @@ class State {
 class Automata {
     public:
     vector<State> states;
+    int currStateId = -1;
 
     Automata() {
         
         states.resize(1001);
     }
 
+    string run(string input){
+        string output;
 
+        // Find the start state and set currState to it.
+        for(int i = 0; i < states.size(); ++i){
+            if(states[i].start){
+                currStateId = i;
+                break;
+            }
+
+        }
+
+        State currState = states[currStateId];
+        for(int i = 0; i < input.size(); ++i){
+            char c = input[i];
+            for(int j = 0; j < currState.transitions.size(); ++j){
+                if(currState.transitions[j]->x == c){
+                    currStateId = currState.transitions[j]->q;
+                }
+            }
+        }
+
+        if(currState.accept){  
+            return "accept " + to_string(currStateId);
+        } else {  
+            return "reject " + to_string(currStateId);
+        }
+        
+
+
+        return output;
+    }
 
 };
