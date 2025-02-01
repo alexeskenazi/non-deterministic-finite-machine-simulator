@@ -47,10 +47,11 @@ class State {
 
 class Automata {
     public:
-    vector<State> state;
+    vector<State> states;
 
     Automata() {
-        state.resize(1001);
+        
+        states.resize(1001);
     }
 
 

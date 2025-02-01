@@ -1,0 +1,20 @@
+{
+    "files.associations": {
+        "fstream": "cpp",
+        "__hash_table": "cpp",
+        "array": "cpp",
+        "type_traits": "cpp",
+        "forward_list": "cpp",
+        "limits": "cpp",
+        "ratio": "cpp",
+        "tuple": "cpp",
+        "variant": "cpp",
+        "__tuple": "cpp",
+        "charconv": "cpp",
+        "chrono": "cpp",
+        "compare": "cpp",
+        "cstddef": "cpp",
+        "filesystem": "cpp",
+        "iosfwd": "cpp"
+    }
+}
