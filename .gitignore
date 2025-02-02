@@ -1,3 +1,5 @@
 
 *.o
 eskenazi_p1
+automata.o
+eskenazi_p1.o
