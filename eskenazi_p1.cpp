@@ -86,7 +86,8 @@ int main(int argc, char* argv[]) {
    
     // Close the input and output files
     infile.close();
-    string output = automata.run(input);
+    automata.input = input;
+    string output = automata.run();
     cout << output << endl;
     return 0;
 }

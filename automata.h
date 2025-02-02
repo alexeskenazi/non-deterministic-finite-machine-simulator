@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <string>
 
 using namespace std;
 
@@ -49,13 +50,14 @@ class Automata {
     public:
     vector<State> states;
     int currStateId = -1;
+    string input;
 
     Automata() {
         
         states.resize(1001);
     }
 
-    string run(string input){
+    string run(){
         string output;
 
         // Find the start state and set currState to it.
