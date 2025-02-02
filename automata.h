@@ -55,7 +55,7 @@ class Automata {
     bool debug;
 
     Automata() {
-        debug = true;
+        debug = false;
         states.resize(1001);
     }
 
