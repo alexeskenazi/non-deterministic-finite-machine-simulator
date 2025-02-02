@@ -95,8 +95,8 @@ string runAutomata(string &input_file, string &input_string){
             infile >> id;
             infile >> temp;
             automata.states[id].id = id;
-            automata.states[id].accept = (temp=="accept");
-            automata.states[id].start = (temp=="start");
+            automata.states[id].accept = (temp.find("accept") != string::npos);
+            automata.states[id].start = (temp.find("start") != string::npos);
         }
 
         if(command == "transition"){
