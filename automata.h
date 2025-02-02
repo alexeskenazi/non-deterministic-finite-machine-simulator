@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <string>
+#include <iostream>
 
 using namespace std;
 
@@ -51,9 +52,10 @@ class Automata {
     vector<State> states;
     int currStateId = -1;
     string input;
+    bool debug;
 
     Automata() {
-        
+        debug = true;
         states.resize(1001);
     }
 
@@ -66,15 +68,19 @@ class Automata {
                 currStateId = i;
                 break;
             }
-
         }
+
+        if(debug) cout << "Start state: " << currStateId << endl;
 
         State currState = states[currStateId];
         for(int i = 0; i < input.size(); ++i){
             char c = input[i];
             for(int j = 0; j < currState.transitions.size(); ++j){
                 if(currState.transitions[j]->x == c){
-                    currStateId = currState.transitions[j]->q;
+                    int newStateId  = currState.transitions[j]->q;
+                    if(debug) cout << "on char: " << c << "(" << currState.transitions[j]->x << ")" << " " << currStateId << " -> " << newStateId << endl;
+                    currStateId = newStateId;
+                    break;
                 }
             }
         }
