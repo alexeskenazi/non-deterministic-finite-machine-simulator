@@ -80,6 +80,7 @@ class Automata {
                     int newStateId  = currState.transitions[j]->q;
                     if(debug) cout << "on char: " << c << "(" << currState.transitions[j]->x << ")" << " " << currStateId << " -> " << newStateId << endl;
                     currStateId = newStateId;
+                    currState = states[currStateId];
                     break;
                 }
             }
