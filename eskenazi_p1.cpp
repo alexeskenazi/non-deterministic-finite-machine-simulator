@@ -16,11 +16,11 @@ void test(string input_file, string input_string, string expected_output) {
     string output = runAutomata(input_file, input_string);
     if (output == expected_output)
     {
-        if (debug) cout << "Test passed: " << input_file << " " << input_string << endl;
+        cout << "Test passed: " << input_file << " " << input_string << " output: " << output << endl;
     }
     else
     {
-        if (debug) cout << "Test failed: " << input_file << " " << input_string << "expected: " << expected_output << " but got: " << output << endl;
+        cout << "Test failed: " << input_file << " " << input_string << " expected: " << expected_output << " but got: " << output << endl;
     }
 }
 
