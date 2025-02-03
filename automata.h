@@ -63,7 +63,7 @@ class Automata {
         string output;
 
         // Find the start state and set currState to it.
-        for(int i = 0; i < states.size(); ++i){
+        for(size_t i = 0; i < states.size(); ++i){
             if(states[i].start){
                 currStateId = i;
                 break;
@@ -73,9 +73,9 @@ class Automata {
         if(debug) cout << "Start state: " << currStateId << endl;
 
         State currState = states[currStateId];
-        for(int i = 0; i < input.size(); ++i){
+        for(size_t i = 0; i < input.size(); ++i){
             char c = input[i];
-            for(int j = 0; j < currState.transitions.size(); ++j){
+            for(size_t j = 0; j < currState.transitions.size(); ++j){
                 if(currState.transitions[j]->x == c){
                     int newStateId  = currState.transitions[j]->q;
                     if(debug) cout << "on char: " << c << "(" << currState.transitions[j]->x << ")" << " " << currStateId << " -> " << newStateId << endl;
