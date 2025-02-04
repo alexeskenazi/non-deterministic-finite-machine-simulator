@@ -74,16 +74,22 @@ class Automata {
 
         // Loop through the chars in the input
         for(size_t i = 0; i < input.size(); ++i){
-            char c = input[i];
 
+            // Get the input character
+             char c = input[i];
+
+            // Loop throgh all the current states to find the applicable transitions
+            // and get the new set of states.
             for(size_t k = 0; k < currStateIds.size(); ++k){
                 int stateId = currStateIds[k];
                 State currState = states[stateId];
 
-                // Loop through the transitions avaiable for the current state
+                // Loop through the transitions avaiable for the current state and
+                // find the new state for those that match the input character.
                 for(size_t j = 0; j < currState.transitions.size(); ++j){
 
-                    // if the transition matches the input char
+                    // if the transition matches the input character then add
+                    // the resulting state to our vector of new states ids
                     if(currState.transitions[j]->x == c){
                         // find the next state for the transition
                         int newStateId  = currState.transitions[j]->q;
@@ -91,13 +97,14 @@ class Automata {
                         newStateIds.push_back(newStateId);
 
                         if(debug) cout << "on char: " << c << "(" << currState.transitions[j]->x << ")" << " " << stateId << " -> " << newStateId << endl;
-                    
                     }
                 }
             }
             currStateIds = newStateIds;
         }
 
+        // Separate the last set of states into accepted and rejected in order
+        // to later create the output string.
         vector<int> acceptedList;
         vector<int> rejectedList;
         for(size_t i = 0; i < currStateIds.size(); ++i){
@@ -110,6 +117,8 @@ class Automata {
             }
         }
 
+        // If there is a least one accepted state then the input was accepted,
+        // else the input was rejected.
         if(acceptedList.size()>0) {
             string output = "accepted";
             for(size_t i = 0; i<acceptedList.size(); ++i) {
