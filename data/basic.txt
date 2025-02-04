@@ -1,0 +1,4 @@
+state 1 start
+state 2 accept
+state 3 acceptstart
+state 4 start accept
