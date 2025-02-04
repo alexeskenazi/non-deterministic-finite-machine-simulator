@@ -67,15 +67,7 @@ class Automata {
         string output;
 
         // Find the start state and set currState to it.
-        int startStateId = -1;
-        for(size_t i = 0; i < states.size(); ++i){
-            if(states[i].start){
-                startStateId = i;
-                break;
-            }
-        }
-
-        if(debug) cout << "Start state: " << startStateId << endl;
+        int startStateId = getStartStateId();
 
         // Set initial state
         currStateIds.push_back(startStateId);
@@ -131,9 +123,21 @@ class Automata {
             }
             return output;
         }
-
     }
 
+    int getStartStateId() {
+        int startStateId = -1;
+        for (size_t i = 0; i < states.size(); ++i)
+        {
+            if (states[i].start)
+            {
+                startStateId = i;
+                break;
+            }
+        }
+        if(debug) cout << "Start state: " << startStateId << endl;
+        return startStateId;
+    }
 
     Automata* buildAutomata(string &input_file) {
         // Open file for reading
