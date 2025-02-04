@@ -1,7 +1,10 @@
 #pragma once
-#include <vector>
-#include <string>
+
 #include <iostream>
+#include <fstream>
+#include <sstream>
+#include <string>
+#include <vector>
 
 using namespace std;
 
@@ -129,6 +132,51 @@ class Automata {
             return output;
         }
 
+    }
+
+
+    Automata* buildAutomata(string &input_file) {
+        // Open file for reading
+        ifstream infile(input_file);
+        if (!infile) {
+            cerr << "Error: Could not open input file " << input_file << endl;
+            return this;
+        }
+
+        string line;
+        // Read file line by line
+        while (getline(infile, line)) {
+            istringstream iss(line);
+            string command;
+            iss >> command;
+            if (command == "state") {
+                int id = 0;
+                string temp;
+                iss >> id;
+                states[id].id = id;
+                while (iss >> temp) {
+                    if ((temp.find("accept") != string::npos)) {
+                        states[id].accept = true;
+                    }
+                    if ((temp.find("start") != string::npos)) {
+                        states[id].start = true;
+                    }
+                }
+            } else if (command == "transition") {
+                int p = 0;
+                char x = 0;
+                int q = 0;
+                iss >> p >> x >> q;
+                Transition* trans = new Transition(p, x, q);
+                states[p].transitions.push_back(trans);
+            }
+        }
+    
+        // Close the input and output files
+        infile.close();
+
+
+        return this;
     }
 
 };

@@ -4,13 +4,70 @@
 #include <string>
 #include <vector>
 #include "automata.h"
+#include <cassert>
 
 bool debug = true;
 
+void testBasicStateParsing();
 void test(string input_file, string input_string, string expected_output);
 void runTests() ;
-string runAutomata(string &input_file, string &input_string);
 
+string runAutomata(string &input_file, string &input_string){
+    Automata automata;
+    automata.buildAutomata(input_file);
+    automata.input = input_string;
+    string output = automata.run();
+    return output;
+}
+
+int main(int argc, char* argv[]) {
+
+    if(argc == 1) {
+        runTests();
+    }
+
+    // Check if the correct number of arguments are provided
+    if (argc != 3) {
+        cerr << "Usage: " << argv[0] << " <input file> <input string>" << endl;
+        cerr << "if there are no command line arguments the program will run its tests." << endl;
+        return 1;
+    }
+
+    // Get the input and output file names from command-line arguments
+    string input_file = argv[1];
+    string input = argv[2];
+
+
+    string output = runAutomata(input_file, input);
+    cout << output << endl;
+    return 0;
+}
+
+
+
+void testBasicStateParsing() {
+    Automata a;
+    string filename = "data/basic.txt";
+    a.buildAutomata(filename);
+
+    // Check the exptect parsed states
+
+    // state 1 start
+    assert(a.states[1].accept == false);
+    assert(a.states[1].start == true);
+
+    // state 2 accept
+    assert(a.states[2].accept == true);
+    assert(a.states[2].start == false);
+
+    // state 3 acceptstart
+    assert(a.states[3].accept == true);
+    assert(a.states[3].start == true);
+
+     // state 4 start accept
+    assert(a.states[4].accept == true);
+    assert(a.states[4].start == true);
+}
 
 void test(string input_file, string input_string, string expected_output) {
     string output = runAutomata(input_file, input_string);
@@ -24,7 +81,9 @@ void test(string input_file, string input_string, string expected_output) {
     }
 }
 
+
 void runTests() {
+    testBasicStateParsing();
     test("data/test1.txt", "0", "reject 1"); 
     
     test("data/sample_1.txt", "0", "reject 1 2");
@@ -56,92 +115,6 @@ void runTests() {
     // test("data/homework3-a.txt", "111010", "reject 5");  
 }
 
-    // read and check command line arguments
-
-    // Extract the filename and the input string
-
-    // Start reading the file
-
-    // For each line in the file 
-    // Parse:
-    // If the line starts with "state" 
-    //       we read the state number
-    //       we read if is a Start state
-    //       we read if is an Accept state
-    //       we add the new state to the automata state vector.
-
-     // If the line starts with "transition" 
-    //       we read the p state
-    //       we read the input char
-    //       we read the q state
-    //       we add the new transition to the transition vector in the corresponding state.
-
-    // Stope reading the file.
-
-
-    // Run the machine with the string input.
-
-string runAutomata(string &input_file, string &input_string){
-    // Open file for reading
-    ifstream infile(input_file);
-    if (!infile) {
-        cerr << "Error: Could not open input file " << input_file << endl;
-        return "";
-    }
-
-    Automata automata;
-    string command;
-    // Read addresses and access types
-    while (infile >> command) {
-        if(command == "state"){
-            int id = 0;
-            string temp;
-            infile >> id;
-            infile >> temp;
-            automata.states[id].id = id;
-            automata.states[id].accept = (temp.find("accept") != string::npos);
-            automata.states[id].start = (temp.find("start") != string::npos);
-        }
-
-        if(command == "transition"){
-            int p = 0;
-            char x = 0;
-            int q = 0;
-            infile >> p;
-            infile >> x;
-            infile >> q;
-
-            Transition* trans = new Transition(p, x, q);
-            automata.states[p].transitions.push_back(trans);
-        }
-        
-    }
-   
-    // Close the input and output files
-    infile.close();
-    automata.input = input_string;
-    string output = automata.run();
-    return output;
-}
-
-int main(int argc, char* argv[]) {
-    runTests();
-
-    // Check if the correct number of arguments are provided
-    if (argc != 3) {
-        cerr << "Usage: " << argv[0] << " <input file> <input string>" << endl;
-        return 1;
-    }
-
-    // Get the input and output file names from command-line arguments
-    string input_file = argv[1];
-    string input = argv[2];
-
-
-    string output = runAutomata(input_file, input);
-    cout << output << endl;
-    return 0;
-}
 
 
 
