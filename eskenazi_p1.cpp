@@ -6,7 +6,7 @@
 #include "automata.h"
 #include <cassert>
 
-bool g_debug = true;
+bool debug = true;
 
 void testBasicStateParsing();
 void test(string input_file, string input_string, string expected_output);
@@ -86,36 +86,34 @@ void test(string input_file, string input_string, string expected_output, bool d
 void runTests() {
     testBasicStateParsing();
 
-
-    // set the last argument to true to debug the specif test
     test("data/test1.txt", "0", "reject 1", false); 
     
-    test("data/sample_1.txt", "0", "reject 1 2", false);
-    test("data/sample_1.txt", "000", "accept 7", false);
-    test("data/sample_1.txt", "10", "reject 1 2", false);
+    test("data/sample_1.txt", "0", "reject 1 2", false); 
+    test("data/sample_1.txt", "000", "accept 7", false); 
+    test("data/sample_1.txt", "10", "reject 1 2", false); 
 
-    test("data/sample_2.txt", "0", "reject 1", false);
-    test("data/sample_2.txt", "0101", "reject 3", false);
-    test("data/sample_2.txt", "010111", "accept 4 5", false);
-    test("data/sample_2.txt", "0101110000", "accept 4 5 6", false);
+    test("data/sample_2.txt", "0", "reject 1", false); 
+    test("data/sample_2.txt", "0101", "reject 3", false); 
+    test("data/sample_2.txt", "010111", "accept 4 5", false); 
+    test("data/sample_2.txt", "0101110000", "accept 4 5 6", false); 
 
-    // test("data/sample_1.txt", "101010101010101010101010101010101010", "accept 4 5 6", false);
-    test("data/test3.txt", "ab", "accept 3 4", false);
-    test("data/test3.txt", "aba", "accept 3 4", false);
+    test("data/sample_1.txt", "101010101010101010101010101010101010", "accept 4 5 6", false); 
+    test("data/test3.txt", "ab", "accept 3 4", false); 
+    test("data/test3.txt", "aba", "accept 3 4", false); 
     test("data/test3.txt", "abb", "accept 3 4", false); // ??
-    test("data/trivial.txt", "", "reject 0", false);
-    test("data/trivial.txt", "a", "reject 0", false);
+    test("data/trivial.txt", "", "reject 0", false); 
+    test("data/trivial.txt", "a", "reject 0", false); 
 
-    test("data/homework4.txt", "011", "reject 9", false);
-    test("data/homework4.txt", "101", "accept 8", false);
-    test("data/homework4.txt", "1111011111", "accept 8", false);
+    test("data/homework4.txt", "011", "reject 9", false); 
+    test("data/homework4.txt", "101", "accept 8", false); 
+    test("data/homework4.txt", "1111011111", "accept 8", false); 
 
-    test("data/homework3-a.txt", "10101", "accept 6", false);
-    test("data/homework3-a.txt", "1010100", "accept 6", false);
-    test("data/homework3-a.txt", "1010110", "accept 6", false);
-    test("data/homework3-a.txt", "11010110", "accept 6", false);
-    test("data/homework3-a.txt", "01010110", "accept 6", false);
-    test("data/homework3-a.txt", "10100", "reject 1", false);
+    test("data/homework3-a.txt", "10101", "accept 6", false); 
+    test("data/homework3-a.txt", "1010100", "accept 6", false); 
+    test("data/homework3-a.txt", "1010110", "accept 6", false); 
+    test("data/homework3-a.txt", "11010110", "accept 6", false); 
+    test("data/homework3-a.txt", "01010110", "accept 6", false); 
+    test("data/homework3-a.txt", "10100", "reject 3", false); 
     test("data/homework3-a.txt", "111010", "reject 5", false);  
 }
 
