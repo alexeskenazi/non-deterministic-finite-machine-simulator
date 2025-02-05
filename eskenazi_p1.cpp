@@ -86,6 +86,8 @@ void test(string input_file, string input_string, string expected_output, bool d
 void runTests() {
     testBasicStateParsing();
 
+
+    // set the last argument to true to debug the specif test
     test("data/test1.txt", "0", "reject 1", false); 
     
     test("data/sample_1.txt", "0", "reject 1 2", false);
@@ -113,7 +115,7 @@ void runTests() {
     test("data/homework3-a.txt", "1010110", "accept 6", false);
     test("data/homework3-a.txt", "11010110", "accept 6", false);
     test("data/homework3-a.txt", "01010110", "accept 6", false);
-    test("data/homework3-a.txt", "10100", "reject 3", true);
+    test("data/homework3-a.txt", "10100", "reject 1", false);
     test("data/homework3-a.txt", "111010", "reject 5", false);  
 }
 
