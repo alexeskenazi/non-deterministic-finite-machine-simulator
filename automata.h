@@ -78,11 +78,22 @@ class Automata {
             // Get the input character
              char c = input[i];
 
+            if(debug) cout << "Input States " << intVectorToString(currStateIds) << endl;
+
             // Loop throgh all the current states to find the applicable transitions
             // and get the new set of states.
+            newStateIds.clear();
             for(size_t k = 0; k < currStateIds.size(); ++k){
                 int stateId = currStateIds[k];
                 State currState = states[stateId];
+
+
+                // If the current state has no transitions for the current input then
+                // keep the state in the vector (add it again)
+                if(getMatchingTransitionsCount(stateId, c)==0) {
+                    if(debug) cout << "   on char: " << c << " " << stateId << " has no transitions. Adding " << stateId << endl;
+                    newStateIds.push_back(stateId);
+                }
 
                 // Loop through the transitions avaiable for the current state and
                 // find the new state for those that match the input character.
@@ -96,12 +107,14 @@ class Automata {
 
                         newStateIds.push_back(newStateId);
 
-                        if(debug) cout << "on char: " << c << "(" << currState.transitions[j]->x << ")" << " " << stateId << " -> " << newStateId << endl;
+                        if(debug) cout << "   on char: " << c << "(" << currState.transitions[j]->x << ")" << " " << stateId << " -> " << newStateId << endl;
                     }
                 }
             }
+
             currStateIds = newStateIds;
             currStateIds = removeDuplicates(currStateIds);
+            if(debug) cout << "Output States " << intVectorToString(currStateIds) << endl;
         }
 
         // Separate the last set of states into accepted and rejected in order
@@ -195,20 +208,41 @@ class Automata {
     }
 
     vector<int> removeDuplicates( vector<int> v ) {
-            vector<int> unique;
-            for(size_t i = 0; i < v.size(); ++i) {
-                bool found = false;
-                for(size_t j = 0; j < unique.size(); ++j) {
-                    if(v[i] == unique[j]) {
-                        found = true;
-                        break;
-                    }
-                }
-                if(!found) {
-                    unique.push_back(v[i]);
+        vector<int> unique;
+        for(size_t i = 0; i < v.size(); ++i) {
+            bool found = false;
+            for(size_t j = 0; j < unique.size(); ++j) {
+                if(v[i] == unique[j]) {
+                    found = true;
+                    break;
                 }
             }
-            return unique;
+            if(!found) {
+                unique.push_back(v[i]);
+            }
         }
+        return unique;
+    }
+
+
+    int getMatchingTransitionsCount(int stateId, char c) {
+        int count = 0;
+        State currState = states[stateId];
+        for(size_t j = 0; j < currState.transitions.size(); ++j){
+            if(currState.transitions[j]->x == c){
+                count++;
+            }
+        }
+        return count;
+
+    }
+
+    string intVectorToString(const vector<int> &vec) {
+        string output;
+        for(size_t i = 0; i<vec.size(); ++i) {
+            output += " " + to_string(vec[i]);
+        }
+        return output;
+    }
 
 };
