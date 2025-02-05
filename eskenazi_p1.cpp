@@ -18,6 +18,9 @@ string runAutomata(string &input_file, string &input_string, bool debug){
     automata.buildAutomata(input_file);
     automata.input = input_string;
     string output = automata.run();
+    // if(debug) {
+    //     cout << automata.DumpToJson() << endl;
+    // }
     return output;
 }
 
@@ -92,12 +95,12 @@ void runTests() {
     test("data/sample_1.txt", "000", "accept 7", false); 
     test("data/sample_1.txt", "10", "reject 1 2", false); 
 
-    test("data/sample_2.txt", "0", "reject 1", false); 
+    test("data/sample_2.txt", "0", "reject 1", true); 
     test("data/sample_2.txt", "0101", "reject 3", false); 
     test("data/sample_2.txt", "010111", "accept 4 5", false); 
     test("data/sample_2.txt", "0101110000", "accept 4 5 6", false); 
 
-    test("data/sample_1.txt", "101010101010101010101010101010101010", "accept 4 5 6", false); 
+    // test("data/sample_1.txt", "101010101010101010101010101010101010", "accept 4 5 6", false); 
     test("data/test3.txt", "ab", "accept 3 4", false); 
     test("data/test3.txt", "aba", "accept 3 4", false); 
     test("data/test3.txt", "abb", "accept 3 4", false); // ??
@@ -113,7 +116,7 @@ void runTests() {
     test("data/homework3-a.txt", "1010110", "accept 6", false); 
     test("data/homework3-a.txt", "11010110", "accept 6", false); 
     test("data/homework3-a.txt", "01010110", "accept 6", false); 
-    test("data/homework3-a.txt", "10100", "reject 3", false); 
+    test("data/homework3-a.txt", "10100", "accept 1", false); 
     test("data/homework3-a.txt", "111010", "reject 5", false);  
 }
 

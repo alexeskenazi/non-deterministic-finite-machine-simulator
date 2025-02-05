@@ -1,5 +1,5 @@
-state	1	start
-state	6	accept
+state	1	startaccept
+state	6	start accept
 transition	1	0	1
 transition	1	1	2
 transition	2	0	3
@@ -12,3 +12,17 @@ transition	5	0	1
 transition	5	1	6
 transition	6	0	6
 transition	6	1	6
+
+10100
+
+s 1
+
+i1 s 2
+
+i0 s 3
+
+i1 s 4
+
+i0 s 5
+
+i0 s 1
