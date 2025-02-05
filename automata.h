@@ -101,6 +101,7 @@ class Automata {
                 }
             }
             currStateIds = newStateIds;
+            currStateIds = removeDuplicates(currStateIds);
         }
 
         // Separate the last set of states into accepted and rejected in order
@@ -117,16 +118,17 @@ class Automata {
             }
         }
 
+
         // If there is a least one accepted state then the input was accepted,
         // else the input was rejected.
         if(acceptedList.size()>0) {
-            string output = "accepted";
+            string output = "accept";
             for(size_t i = 0; i<acceptedList.size(); ++i) {
                 output += " " + to_string(acceptedList[i]);
             }
             return output;
         } else {
-            string output = "rejected";
+            string output = "reject";
             for(size_t i = 0; i<rejectedList.size(); ++i) {
                 output += " " + to_string(rejectedList[i]);
             }
@@ -191,5 +193,22 @@ class Automata {
 
         return this;
     }
+
+    vector<int> removeDuplicates( vector<int> v ) {
+            vector<int> unique;
+            for(size_t i = 0; i < v.size(); ++i) {
+                bool found = false;
+                for(size_t j = 0; j < unique.size(); ++j) {
+                    if(v[i] == unique[j]) {
+                        found = true;
+                        break;
+                    }
+                }
+                if(!found) {
+                    unique.push_back(v[i]);
+                }
+            }
+            return unique;
+        }
 
 };
