@@ -77,13 +77,14 @@ void test(string input_file, string input_string, string expected_output) {
     }
     else
     {
-        cout << "Test failed: " << input_file << " " << input_string << " expected: " << expected_output << " but got: " << output << endl;
+        cout << "Test FAILED: " << input_file << " " << input_string << " expected: " << expected_output << " but got: " << output << endl;
     }
 }
 
 
 void runTests() {
     testBasicStateParsing();
+
     test("data/test1.txt", "0", "reject 1"); 
     
     test("data/sample_1.txt", "0", "reject 1 2");
@@ -95,24 +96,24 @@ void runTests() {
     test("data/sample_2.txt", "010111", "accept 4 5");
     test("data/sample_2.txt", "0101110000", "accept 4 5 6");
 
-    // // test("data/sample_1.txt", "101010101010101010101010101010101010", "accept 4 5 6");
-    // test("data/test3.txt", "ab", "accept 3 4");
-    // test("data/test3.txt", "aba", "accept 3 4");
-    // test("data/test3.txt", "abb", "accept 3 4"); // ??
-    // test("data/trivial.txt", "", "reject 0");
-    // test("data/trivial.txt", "a", "reject 0");
+    // test("data/sample_1.txt", "101010101010101010101010101010101010", "accept 4 5 6");
+    test("data/test3.txt", "ab", "accept 3 4");
+    test("data/test3.txt", "aba", "accept 3 4");
+    test("data/test3.txt", "abb", "accept 3 4"); // ??
+    test("data/trivial.txt", "", "reject 0");
+    test("data/trivial.txt", "a", "reject 0");
 
-    // test("data/homework4.txt", "011", "reject 9");
-    // test("data/homework4.txt", "101", "accept 8");
-    // test("data/homework4.txt", "1111011111", "accept 8");
+    test("data/homework4.txt", "011", "reject 9");
+    test("data/homework4.txt", "101", "accept 8");
+    test("data/homework4.txt", "1111011111", "accept 8");
 
-    // test("data/homework3-a.txt", "10101", "accept 6");
-    // test("data/homework3-a.txt", "1010100", "accept 6");
-    // test("data/homework3-a.txt", "1010110", "accept 6");
-    // test("data/homework3-a.txt", "11010110", "accept 6");
-    // test("data/homework3-a.txt", "01010110", "accept 6");
-    // test("data/homework3-a.txt", "10100", "reject 3");
-    // test("data/homework3-a.txt", "111010", "reject 5");  
+    test("data/homework3-a.txt", "10101", "accept 6");
+    test("data/homework3-a.txt", "1010100", "accept 6");
+    test("data/homework3-a.txt", "1010110", "accept 6");
+    test("data/homework3-a.txt", "11010110", "accept 6");
+    test("data/homework3-a.txt", "01010110", "accept 6");
+    test("data/homework3-a.txt", "10100", "reject 3");
+    test("data/homework3-a.txt", "111010", "reject 5");  
 }
 
 

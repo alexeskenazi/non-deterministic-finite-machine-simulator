@@ -1,0 +1,17 @@
+state 0 start
+state 3 accept
+state 4 accept
+transition 0 a 1
+transition 0 a 2
+transition 1 b 3
+transition 2 b 4
+transition 3 a 3
+transition 4 a 4
+
+
+abb 
+
+0
+1
+3
+4
