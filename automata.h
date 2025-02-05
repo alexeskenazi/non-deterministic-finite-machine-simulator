@@ -72,6 +72,8 @@ class Automata {
         // Set initial state
         currStateIds.push_back(startStateId);
 
+        if(debug) cout << "Input string '" << input << "'" << endl;
+
         // Loop through the chars in the input
         for(size_t i = 0; i < input.size(); ++i){
 
