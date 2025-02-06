@@ -199,6 +199,9 @@ class Automata {
                 iss >> p >> x >> q;
                 Transition* trans = new Transition(p, x, q);
                 states[p].transitions.push_back(trans);
+
+                // Mark the target state as a valid state
+                states[q].id = q;
             }
         }
     
