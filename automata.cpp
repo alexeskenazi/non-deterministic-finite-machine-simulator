@@ -1,7 +1,7 @@
 #include "automata.h"
 
-
-
+// This function will build the automata from the input file
+// It can be use at https://automatonsimulator.com/ to visualize the NFA
 
 string Automata::DumpToJson() {
         // create a json string based on the following example:
@@ -168,15 +168,11 @@ string Automata::DumpToJson() {
         }
         json += "  ],\n";
         json += "  \"bulkTests\": {\n";
-        json += "    \"accept\": \"AB\\nABAB\\nABABAB\",\n";
-        json += "    \"reject\": \"\\nA\\nB\\nABA\\nBA\\nBB\\nABABB\"\n";
+        json += "    \"accept\": \"sampleinput1\\nsampleinput3\\nsampleinput3\",\n";
+        json += "    \"reject\": \"sampleinput1\\nsampleinput3\\nsampleinput3\",\n";
         json += "  }\n";
         json += "}\n";
         
-
-        
-
         return json;
-
 
     }
