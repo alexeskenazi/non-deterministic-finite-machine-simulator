@@ -33,7 +33,7 @@ class State {
         int id;
         bool start;
         bool accept;
-        vector<Transition> transitions;
+        vector<Transition*> transitions;
     
     State() {
         id = -1;
@@ -105,13 +105,13 @@ class Automata {
 
                     // if the transition matches the input character then add
                     // the resulting state to our vector of new states ids
-                    if(currState.transitions[j].x == c){
+                    if(currState.transitions[j]->x == c){
                         // find the next state for the transition
-                        int newStateId  = currState.transitions[j].q;
+                        int newStateId  = currState.transitions[j]->q;
 
                         newStateIds.push_back(newStateId);
 
-                        if(debug) cout << "   on char: " << c << "(" << currState.transitions[j].x << ")" << " " << stateId << " -> " << newStateId << endl;
+                        if(debug) cout << "   on char: " << c << "(" << currState.transitions[j]->x << ")" << " " << stateId << " -> " << newStateId << endl;
                     }
                 }
             }
@@ -199,7 +199,7 @@ class Automata {
                 char x = 0;
                 int q = 0;
                 iss >> p >> x >> q;
-                Transition trans(p, x, q);
+                Transition* trans = new Transition(p, x, q);
                 states[p].transitions.push_back(trans);
 
                 // Mark the target state as a valid state
@@ -236,7 +236,7 @@ class Automata {
         int count = 0;
         State currState = states[stateId];
         for(size_t j = 0; j < currState.transitions.size(); ++j){
-            if(currState.transitions[j].x == c){
+            if(currState.transitions[j]->x == c){
                 count++;
             }
         }
