@@ -17,4 +17,8 @@ clean:
 
 run: clean eskenazi_p1
 	./eskenazi_p1
+
+tests: clean eskenazi_p1
+	./eskenazi_p1 test
+	./eskenazi_p1 data/sample_2.txt 010111
 	
