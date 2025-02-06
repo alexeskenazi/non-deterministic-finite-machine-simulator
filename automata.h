@@ -63,6 +63,8 @@ class Automata {
         states.resize(1001);
     }
 
+    string DumpToJson();
+
     string run(){
         string output;
 
@@ -250,90 +252,5 @@ class Automata {
         return output;
     }
 
-    string DumpToJson() {
-        // create a json string based on the following example:
-//         {
-//   "type": "NFA",
-//   "nfa": {
-//     "transitions": {
-//       "start": {
-//         "A": [
-//           "s0"
-//         ]
-//       },
-//       "s0": {
-//         "B": [
-//           "s1"
-//         ]
-//       },
-//       "s1": {
-//         "": [
-//           "start"
-//         ]
-//       }
-//     },
-//     "startState": "start",
-//     "acceptStates": [
-//       "s1"
-//     ]
-//   },
-//   "states": {
-//     "start": {},
-//     "s0": {
-//       "top": 150,
-//       "left": 245,
-//       "displayId": "s0"
-//     },
-//     "s1": {
-//       "isAccept": true,
-//       "top": 327,
-//       "left": 224,
-//       "displayId": "s1"
-//     }
-//   },
-//   "transitions": [
-//     {
-//       "stateA": "start",
-//       "label": "A",
-//       "stateB": "s0"
-//     },
-//     {
-//       "stateA": "s0",
-//       "label": "B",
-//       "stateB": "s1"
-//     },
-//     {
-//       "stateA": "s1",
-//       "label": "ϵ",
-//       "stateB": "start"
-//     }
-//   ],
-//   "bulkTests": {
-//     "accept": "AB\nABAB\nABABAB",
-//     "reject": "\nA\nB\nABA\nBA\nBB\nABABB"
-//   }
-// }
-        string json = "{\n";
-        json += "  \"type\": \"NFA\",\n";
-        json += "  \"nfa\": {\n";
-        json += "    \"transitions\": {\n";
-
-        // Loop through the states and create the transitions
-        for(size_t i = 0; i < states.size(); ++i) {
-            State currState = states[i];
-            if(currState.id == -1) continue;
-            json += "      \"" + to_string(currState.id) + "\": {\n";
-            for(size_t j = 0; j < currState.transitions.size(); ++j) {
-                json += "        \"" + string(1, currState.transitions[j]->x) + "\": [\n";
-                json += "          \"" + to_string(currState.transitions[j]->q) + "\"\n";
-                json += "        ]\n";
-            }
-            json += "      },\n";
-        }
-
-        return json;
-
-
-    }
 
 };
