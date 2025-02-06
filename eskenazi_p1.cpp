@@ -6,6 +6,8 @@
 #include "automata.h"
 #include <cassert>
 
+using namespace std;
+
 bool debug = true;
 
 void testBasicStateParsing();
@@ -94,11 +96,19 @@ void test(string input_file, string input_string, string expected_output, bool d
     string output = runAutomata(input_file, input_string, debug);
     if (output == expected_output)
     {
-        cout << "Test passed: " << input_file << " " << input_string << " output: " << output << endl;
+        if(input_string.size() > 10) {
+            cout << "Test passed: " << input_file << " " << input_string.substr(0,10) << "... output: " << output << endl;
+        } else {
+            cout << "Test passed: " << input_file << " " << input_string << " output: " << output << endl;
+        }
     }
     else
     {
-        cout << "Test FAILED: " << input_file << " " << input_string << " expected: " << expected_output << " but got: " << output << endl;
+        if(input_string.size() > 10) {
+            cout << "Test FAILED: " << input_file << " " << input_string.substr(0,10) << "... expected: " << expected_output << " but got: " << output << endl;
+        } else {
+            cout << "Test FAILED: " << input_file << " " << input_string << " expected: " << expected_output << " but got: " << output << endl;
+        }
     }
 }
 
@@ -135,6 +145,22 @@ void runTests() {
     test("data/homework3-a.txt", "01010110", "accept 6", false); 
     test("data/homework3-a.txt", "10100", "accept 1", false); 
     test("data/homework3-a.txt", "111010", "reject 5", false);  
+
+
+    // generate a string of 1000 ones 
+    string longString;
+    for (int i = 1; i < 1000; ++i){
+        longString += "1";
+    }
+    test("data/long.txt", longString, "accept 1000", false);
+    
+
+    // Generata a string of 999 ones
+    longString = "";
+    for (int i = 1; i < 999; ++i){
+      longString += "1";
+    }
+    test("data/long.txt", longString, "reject 999", false);
 }
 
 
