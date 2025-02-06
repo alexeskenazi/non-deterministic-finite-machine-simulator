@@ -18,14 +18,3 @@ transition	5	0	6
 transition	5	1	6
 transition	6	0	6
 transition	6	1	6
-
-
-
-
-Start state: 1
-on char: 0(0) 1 -> 1
-on char: 1(1) 1 -> 2
-on char: 0(0) 1 -> 1
-on char: 0(0) 2 -> 2
-on char: 1(1) 1 -> 2
-on char: 1(1) 2 -> 3
