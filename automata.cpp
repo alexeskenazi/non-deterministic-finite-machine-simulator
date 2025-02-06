@@ -95,8 +95,8 @@ string Automata::DumpToJson() {
             processed++;
             json += "      \"" + to_string(currState.id) + "\": {\n";
             for(size_t j = 0; j < currState.transitions.size(); ++j) {
-                json += "        \"" + string(1, currState.transitions[j]->x) + "\": [\n";
-                json += "          \"" + to_string(currState.transitions[j]->q) + "\"\n";
+                json += "        \"" + string(1, currState.transitions[j].x) + "\": [\n";
+                json += "          \"" + to_string(currState.transitions[j].q) + "\"\n";
                 if(j < currState.transitions.size()-1) {
                     json += "        ],\n";
                 } else {
@@ -157,8 +157,8 @@ string Automata::DumpToJson() {
             for(size_t j = 0; j < currState.transitions.size(); ++j) {
                 json += "    {\n";
                 json += "      \"stateA\": \"" + to_string(currState.id) + "\",\n";
-                json += "      \"label\": \"" + string(1, currState.transitions[j]->x) + "\",\n";
-                json += "      \"stateB\": \"" + to_string(currState.transitions[j]->q) + "\"\n";
+                json += "      \"label\": \"" + string(1, currState.transitions[j].x) + "\",\n";
+                json += "      \"stateB\": \"" + to_string(currState.transitions[j].q) + "\"\n";
                 if(processed < count || j < currState.transitions.size()-1) {
                     json += "    },\n";
                 } else {
