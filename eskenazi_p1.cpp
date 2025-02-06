@@ -31,7 +31,10 @@ int main(int argc, char* argv[]) {
     if(argc == 2 && (string(argv[1]) == "test" || string(argv[1]) == "tests")) {
         cout << "Running tests" << endl;
         runTests();
-    } else if (argc != 3) {
+        return 0;
+    }
+    
+    if (argc != 3) {
         cout << "******************************************************" << endl;
         cout << "* Runs an NFA (Non Deterministic Finite Automata)" << endl;
         cout << "******************************************************" << endl;
@@ -53,7 +56,7 @@ int main(int argc, char* argv[]) {
 
     // Get the input and output file names from command-line arguments
     string input_file = argv[1];
-    string input = argv[2];
+    string input = argc>2 ? argv[2] : "";
 
 
     string output = runAutomata(input_file, input, false);
@@ -70,7 +73,7 @@ void testBasicStateParsing() {
     // state 3 acceptstart
     // state 4 start accept
     Automata a;
-    string filename = "data/basic.txt";
+    string filename = "./data/basic.txt";
     a.buildAutomata(filename);
 
     // Check the exptect parsed states
