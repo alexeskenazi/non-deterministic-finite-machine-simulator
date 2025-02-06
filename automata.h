@@ -8,6 +8,8 @@
 
 using namespace std;
 
+#define MAX_STATES 1500
+
 
 class Transition {
     public:
@@ -60,7 +62,7 @@ class Automata {
 
     Automata() {
         debug = false;
-        states.resize(1001);
+        states.resize(MAX_STATES+1);
     }
 
     string DumpToJson();
@@ -185,6 +187,13 @@ class Automata {
                 int id = 0;
                 string temp;
                 iss >> id;
+
+                if(id<0 || id > MAX_STATES) {
+                    // Ignore states that are out of range
+                    continue;
+                }
+
+
                 states[id].id = id;
                 while (iss >> temp) {
                     if ((temp.find("accept") != string::npos)) {
@@ -199,6 +208,12 @@ class Automata {
                 char x = 0;
                 int q = 0;
                 iss >> p >> x >> q;
+                if (p < 0 || p > MAX_STATES || q < 0 || q > MAX_STATES)
+                {
+                    // Ignore transitions that are out of range
+                    continue;
+                }
+                
                 Transition* trans = new Transition(p, x, q);
                 states[p].transitions.push_back(trans);
 

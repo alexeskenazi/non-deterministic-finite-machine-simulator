@@ -1,3 +1,4 @@
+state   0
 state	1	start
 state	2
 state	3
@@ -998,6 +999,8 @@ state	997
 state	998
 state	999
 state	1000	accept
+state	1001	accept
+state	1002	accept
 transition	1	1	2
 transition	2	1	3
 transition	3	1	4
@@ -1998,3 +2001,4 @@ transition	997	1	998
 transition	998	1	999
 transition	999	1	1000
 transition	1000	1	1000
+transition	1002	1	1002
