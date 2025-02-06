@@ -26,15 +26,27 @@ string runAutomata(string &input_file, string &input_string, bool debug){
 
 int main(int argc, char* argv[]) {
 
-    if(argc == 1) {
+    if(argc == 2 && (string(argv[1]) == "test" || string(argv[1]) == "tests")) {
+        cout << "Running tests" << endl;
         runTests();
-    }
-
-    // Check if the correct number of arguments are provided
-    if (argc != 3) {
-        cerr << "Usage: " << argv[0] << " <input file> <input string>" << endl;
-        cerr << "if there are no command line arguments the program will run its tests." << endl;
-        return 1;
+    } else if (argc != 3) {
+        cout << "******************************************************" << endl;
+        cout << "* Runs an NFA (Non Deterministic Finite Automata)" << endl;
+        cout << "******************************************************" << endl;
+        cout << "* Notes and Limitations:" << endl;
+        cout << "*  E-transitions are NOT yet supported." << endl;
+        cout << "*  Supports up to 1000 States." << endl;
+        cout << "*  Supports multiple transitions per state." << endl;
+        cout << "*  Supports multiple accept states." << endl;
+        cout << "*  Supports a single start state." << endl;
+        cout << "*  States are identified by an integer id." << endl;
+        cout << "* Usage 1: " << argv[0] << " <input file> <input string>" << endl;
+        cout << "* Usage 2: " << argv[0] << " test" << endl;
+        cout << "* Examples:" << endl;
+        cout << "*    " << argv[0] << " data/sample_2.txt 010111" << endl;
+        cout << "*    " << argv[0] << " test" << endl;
+        cout << "******************************************************" << endl;
+        return 0;
     }
 
     // Get the input and output file names from command-line arguments
@@ -50,6 +62,11 @@ int main(int argc, char* argv[]) {
 
 
 void testBasicStateParsing() {
+    // Test the basic state parsing to make sure the following formats are accepted:
+    // state 1 start
+    // state 2 accept
+    // state 3 acceptstart
+    // state 4 start accept
     Automata a;
     string filename = "data/basic.txt";
     a.buildAutomata(filename);
@@ -91,7 +108,7 @@ void runTests() {
 
     test("data/test1.txt", "0", "reject 1", false); 
     
-    test("data/sample_1.txt", "0", "reject 1 2", true); 
+    test("data/sample_1.txt", "0", "reject 1 2", false); 
     test("data/sample_1.txt", "000", "accept 7", false); 
     test("data/sample_1.txt", "10", "reject 1 2", false); 
 
