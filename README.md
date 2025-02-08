@@ -1,6 +1,6 @@
 # NFA - Non-Deterministic Finite Machine
 
-This project implements a Non-Deterministic Finite Automaton (NFA) simulator. It reads an automaton definition from a file and processes input strings to determine if they are accepted or rejected by the automaton.
+This project implements a Non-Deterministic Finite Automata (NFA) simulator. It reads an automaton definition from a file and processes input strings to determine if they are accepted or rejected by the automata.
 
 ## Files
 
