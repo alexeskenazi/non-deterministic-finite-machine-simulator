@@ -43,9 +43,11 @@ int main(int argc, char* argv[]) {
     string input_file = argv[1];
     string input = argc>2 ? argv[2] : "";
 
+    string fileContents = readFile(input_file);
+
     Automata automata;
     automata.debug = debug;
-    automata.buildAutomataFromFile(input_file);
+    automata.buildAutomataFromString(fileContents);
     string output = automata.run();
     cout << output << endl;
     return 0;

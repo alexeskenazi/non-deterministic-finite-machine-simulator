@@ -5,6 +5,7 @@
 #include <sstream>
 #include <string>
 #include <vector>
+#include "helper.h"
 
 using namespace std;
 
@@ -17,21 +18,21 @@ class Transition {
         char x;
         int q;
 
-        Transition() {
-            p = -1;
-            q = -1;
-            x = -1;
-        }
+    Transition() {
+        p = -1;
+        q = -1;
+        x = -1;
+    }
 
-        Transition(int _p, char _x, int _q) {
-            p = _p;
-            q = _q;
-            x = _x;
-        }
+    Transition(int _p, char _x, int _q) {
+        p = _p;
+        q = _q;
+        x = _x;
+    }
 
-        ~Transition() {
-            // cout << "Transition destroyed" << endl;
-        }
+    ~Transition() {
+        // cout << "Transition destroyed" << endl;
+    }
 };
 
 class State {
@@ -61,19 +62,17 @@ class State {
 
 class Automata {
     public:
-    vector<State> states;
-    vector<int> currStateIds;
-    vector<int> newStateIds;
-    string input;
-    bool debug;
+        vector<State> states;
+        vector<int> currStateIds;
+        vector<int> newStateIds;
+        string input;
+        bool debug;
 
-    Automata();
+        Automata();
+        Automata* buildAutomataFromString(const string &fileContents);
+        string run();
 
-    Automata* buildAutomataFromFile(string &input_file);
-    Automata* buildAutomataFromString(const string &fileContents);
-    string run();
-    int getStartStateId();
-    int getMatchingTransitionsCount(int stateId, char c);
-    vector<int> removeDuplicates(const vector<int>& v);
-    string intVectorToString(const vector<int>& vec);
+    private:
+        int getStartStateId();
+        int getMatchingTransitionsCount(int stateId, char c);
 };
