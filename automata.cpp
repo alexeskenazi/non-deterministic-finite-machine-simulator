@@ -106,7 +106,7 @@ int Automata::getStartStateId() {
     return startStateId;
 }
 
-Automata* Automata::buildAutomataFromString(const string &fileContents) {
+Automata* Automata::build(const string &fileContents) {
     // Process the file contents line by line
     istringstream iss(fileContents);
     string line;

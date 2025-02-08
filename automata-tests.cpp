@@ -16,7 +16,7 @@ void testBasicStateParsing() {
     // Test the basic state parsing to make sure the following formats are accepted:
 
     Automata a;
-    a.buildAutomataFromString(basic);
+    a.build(basic);
 
     // Check the exptect parsed states
 
@@ -44,7 +44,7 @@ void testBasicStateParsing() {
 void test(string test_name, string automata_string, string input_string, string expected_output, bool debug) {
     Automata automata;
     automata.debug = debug;
-    automata.buildAutomataFromString(automata_string);
+    automata.build(automata_string);
     automata.input = input_string;
     string output = automata.run();
     

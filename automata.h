@@ -69,7 +69,7 @@ class Automata {
         bool debug;
 
         Automata();
-        Automata* buildAutomataFromString(const string &fileContents);
+        Automata* build(const string &fileContents);
         string run();
 
     private:
