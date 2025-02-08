@@ -32,7 +32,6 @@ class Transition {
         ~Transition() {
             // cout << "Transition destroyed" << endl;
         }
-
 };
 
 class State {
@@ -57,8 +56,6 @@ class State {
    ~State() {
         // cout << "State destroyed" << endl;
     }
-
-
 } ;
 
 
@@ -76,18 +73,6 @@ class Automata {
     }
 
     string DumpToJson();
-
-    string runAutomata(string &input_file, string &input_string, bool debug){
-        Automata automata;
-        automata.debug = debug;
-        automata.buildAutomata(input_file);
-        automata.input = input_string;
-        string output = automata.run();
-        if(debug) {
-            cout << automata.DumpToJson() << endl;
-        }
-        return output;
-    }
 
     string run(){
         string output;
@@ -191,7 +176,7 @@ class Automata {
         return startStateId;
     }
 
-    Automata* buildAutomata(string &input_file) {
+    Automata* buildAutomataFromFile(string &input_file) {
         // Open file for reading
         ifstream infile(input_file);
         if (!infile) {
@@ -199,25 +184,36 @@ class Automata {
             return this;
         }
 
+        // Read the entire file into a string
+        stringstream buffer;
+        buffer << infile.rdbuf();
+        string fileContents = buffer.str();
+        infile.close();
+
+        // Call the new method to process the file contents
+        return buildAutomataFromString(fileContents);
+    }
+
+    Automata* buildAutomataFromString(const string &fileContents) {
+        // Process the file contents line by line
+        istringstream iss(fileContents);
         string line;
-        // Read file line by line
-        while (getline(infile, line)) {
-            istringstream iss(line);
+        while (getline(iss, line)) {
+            istringstream lineStream(line);
             string command;
-            iss >> command;
+            lineStream >> command;
             if (command == "state") {
                 int id = 0;
                 string temp;
-                iss >> id;
+                lineStream >> id;
 
-                if(id<0 || id > MAX_STATES) {
+                if(id < 0 || id > MAX_STATES) {
                     // Ignore states that are out of range
                     continue;
                 }
 
-
                 states[id].id = id;
-                while (iss >> temp) {
+                while (lineStream >> temp) {
                     if ((temp.find("accept") != string::npos)) {
                         states[id].accept = true;
                     }
@@ -229,26 +225,17 @@ class Automata {
                 int p = 0;
                 char x = 0;
                 int q = 0;
-                iss >> p >> x >> q;
-                if (p < 0 || p > MAX_STATES || q < 0 || q > MAX_STATES)
-                {
+                lineStream >> p >> x >> q;
+                if (p < 0 || p > MAX_STATES || q < 0 || q > MAX_STATES) {
                     // Ignore transitions that are out of range
                     continue;
                 }
-                
-                // for(int m = 0; m<1000; ++m) {
-                //     states[p].transitions.push_back(Transition(p, x, q));
-                // }
                 states[p].transitions.push_back(Transition(p, x, q));
 
                 // Mark the target state as a valid state
                 states[q].id = q;
             }
         }
-    
-        // Close the input and output files
-        infile.close();
-
 
         return this;
     }

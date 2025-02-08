@@ -8,7 +8,7 @@
 
 using namespace std;
 
-bool debug = true;
+bool debug = false;
 
 
 int main(int argc, char* argv[]) {
@@ -44,7 +44,9 @@ int main(int argc, char* argv[]) {
     string input = argc>2 ? argv[2] : "";
 
     Automata automata;
-    string output = automata.runAutomata(input_file, input, false);
+    automata.debug = debug;
+    automata.buildAutomataFromFile(input_file);
+    string output = automata.run();
     cout << output << endl;
     return 0;
 }
