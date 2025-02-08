@@ -9,7 +9,6 @@
 
 using namespace std;
 
-
-string readFile(string &input_file);
+string readFile(const string &input_file);
 vector<int> removeDuplicates(const vector<int>& vec);
 string intVectorToString(const vector<int>& vec);

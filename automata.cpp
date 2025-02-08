@@ -6,7 +6,7 @@ Automata::Automata() {
     states.resize(MAX_STATES+1);
 }
 
-string Automata::run(){
+string Automata::run() {
     string output;
 
     // Find the start state and set currState to it.
@@ -96,10 +96,8 @@ string Automata::run(){
 
 int Automata::getStartStateId() {
     int startStateId = -1;
-    for (size_t i = 0; i < states.size(); ++i)
-    {
-        if (states[i].start)
-        {
+    for (size_t i = 0; i < states.size(); ++i) {
+        if (states[i].start) {
             startStateId = i;
             break;
         }
@@ -163,7 +161,6 @@ int Automata::getMatchingTransitionsCount(int stateId, char c) {
         }
     }
     return count;
-
 }
 
 

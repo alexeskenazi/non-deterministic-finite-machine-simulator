@@ -1,7 +1,7 @@
 #include "helper.h"
 
 
-string readFile(string &input_file) {
+string readFile(const string &input_file) {
     // Open file for reading
     ifstream infile(input_file);
     if (!infile) {
