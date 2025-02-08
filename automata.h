@@ -77,6 +77,18 @@ class Automata {
 
     string DumpToJson();
 
+    string runAutomata(string &input_file, string &input_string, bool debug){
+        Automata automata;
+        automata.debug = debug;
+        automata.buildAutomata(input_file);
+        automata.input = input_string;
+        string output = automata.run();
+        if(debug) {
+            cout << automata.DumpToJson() << endl;
+        }
+        return output;
+    }
+
     string run(){
         string output;
 
