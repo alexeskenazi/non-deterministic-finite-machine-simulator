@@ -37,8 +37,8 @@ void testBasicStateParsing() {
     assert(a.states[4].start == true);
 
     // state 5 start accept
-    assert(a.states[4].accept == true);
-    assert(a.states[4].start == true);
+    assert(a.states[5].accept == true);
+    assert(a.states[5].start == true);
 }
 
 void test(string test_name, string automata_string, string input_string, string expected_output, bool debug) {
