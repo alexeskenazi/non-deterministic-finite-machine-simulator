@@ -72,8 +72,6 @@ class Automata {
         states.resize(MAX_STATES+1);
     }
 
-    string DumpToJson();
-
     string run(){
         string output;
 
