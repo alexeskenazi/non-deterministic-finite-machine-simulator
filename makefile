@@ -28,3 +28,7 @@ tests: clean eskenazi_p1
 	./eskenazi_p1 test
 	./eskenazi_p1 sample_2.txt 010111
 
+submit:
+	mkdir -p eskenazi_p1
+	cp automata.cpp automata.h automata-tests.cpp automata-tests.h eskenazi_p1.cpp helper.cpp helper.h makefile eskenazi_p1
+
