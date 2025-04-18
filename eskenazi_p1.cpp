@@ -48,6 +48,7 @@ int main(int argc, char* argv[]) {
     Automata automata;
     automata.debug = debug;
     automata.build(fileContents);
+    automata.input = input;
     string output = automata.run();
     cout << output << endl;
     return 0;
